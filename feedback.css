@@ -1,0 +1,80 @@
+.wrappertagasi{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  max-width: 350px;
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+}
+
+.wrappertagasi h2{
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--purple2);
+  font-weight: bold;
+}
+
+.wrappertagasi .input_field{
+  margin-bottom: 10px;
+}
+
+.wrappertagasi .input_field input[type="text"],
+.wrappertagasi textarea{
+  border: 2px solid var(--purple2);
+  border-radius: 5px;
+  width: 93%;
+  padding: 10px;
+  background: #fff;
+}
+
+.wrappertagasi textarea{
+  resize: none;
+  background: #fff;
+  height: 150px;
+}
+
+.wrappertagasi .btnsub input[type="submit"]{
+  border: 0px;
+  margin-top: 15px;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  background: var(--purple2);
+  color: var(--font-color-low-contrast);
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  content: "Saada";
+}
+
+#error_message{
+  margin-bottom: 20px;
+  background: #de3f44;
+  padding: 0px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+  
+  font-size: 14px;
+  transition: all 0.5s ease;
+}
+
+#yourfeedback {
+  font-weight: bold;
+}
+
+#email {
+  font-weight: bold;
+}
+
+#yourfeedback:focus-visible {
+  border: 2px solid var(--purple2);
+}
+
+#email:focus-visible {
+  border: 2px solid var(--purple2);
+}

@@ -9,7 +9,6 @@ function setCookie(name, value ){
 
 function getCookie(cname) {
   let name = cname + "=";
-  console.log(document.cookie)
   let ca = document.cookie.split(';');
   
   for(let i = 0; i < ca.length; i++) {

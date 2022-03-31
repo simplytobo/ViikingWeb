@@ -797,6 +797,23 @@ $("#sidenav-premium").on('click', function (e) {
   $("#premiumScreen").removeClass("hide")
   //appendChildToSection({ child:inlinediv, section:premiumScreen});
 });
+
+$("#sidenav-tagasiside").on('click', function (e) {
+  //var premiumScreen = document.getElementById('premiumScreen');
+  $("#main-screen-id").addClass( "hide" )
+  $("#feedback-form-id").removeClass("hide")
+  //appendChildToSection({ child:inlinediv, section:premiumScreen});
+});
+
+$("#tagasisideBackBtn").on('click', function (e) {
+  //var premiumScreen = document.getElementById('premiumScreen');
+  $("#main-screen-id").removeClass( "hide" )
+  $("#feedback-form-id").addClass("hide")
+  //appendChildToSection({ child:inlinediv, section:premiumScreen});
+});
+
+
+
 /* changeActive()
 function changeActive(){
   inlindeDivs = document.querySelectorAll(".inlindediv") ;
