@@ -1,0 +1,293 @@
+
+.menu1Check{
+
+}
+.MenuLabel {
+	 display: block;
+	 cursor: pointer;
+
+}
+
+
+
+ path {
+	 fill: none;
+	 stroke: #fff;
+	 stroke-width: 3;
+	 stroke-linecap: round;
+	 stroke-linejoin: round;
+	 --length: 24;
+	 --offset: -38;
+	 stroke-dasharray: var(--length) var(--total-length);
+	 stroke-dashoffset: var(--offset);
+	 transition: all 0.5s cubic-bezier(0.500, 0.035, 0.25, 0.7);
+}
+ circle {
+	 fill: #fff 3;
+	 opacity: 0;
+}
+/*  label:hover circle {
+	 opacity: 1;
+} */
+ .cross input:checked + svg .line--1, .cross input:checked + svg .line--3 {
+	 --length: 22.627416998;
+}
+ .cross input:checked + svg .line--2 {
+	 --length: 0;
+}
+ .back input:checked + svg .line--1, .back input:checked + svg .line--3 {
+	 --length: 8.602325267;
+}
+ .menu--1 {
+	width:5rem;
+   z-index:10;
+}
+ .menu--1 .line--1, .menu--1 .line--3 {
+	 --total-length: 126.6418304443;
+}
+ .menu--1 .line--2 {
+	 --total-length: 70;
+}
+ .menu--1 input:checked + svg .line--1, .menu--1 input:checked + svg .line--3 {
+	 --offset: -94.1149185097;
+}
+ .menu--1 input:checked + svg .line--2 {
+	 --offset: -50;
+}
+/* btn end */
+/* sidebar start */
+.st-menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 8;
+	visibility: hidden;
+	height: 100%;
+	background: var(--background-division2);
+	-webkit-transition: all 0.4s;
+	transition: all 0.4s;
+  padding-top: 3.5rem;
+  padding-left: 2rem;
+  padding-right: 5rem;
+  color:white;
+
+}
+
+
+.st-effect-1.st-menu {
+	visibility: visible;
+	-webkit-transform: translate3d(-100%, 0, 0);
+	transform: translate3d(-100%, 0, 0);
+}
+
+.st-effect-1.st-menu-open .st-effect-1.st-menu {
+	visibility: visible;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+.sideNavElement{
+  display: flex;
+  padding: 0.2rem;
+  transition: transform .1s cubic-bezier(.7, 0, .7, 1);
+}
+
+#sidenav-logisisse:hover{
+  transform: scale(1.1);
+}
+
+#sidenav-andmed:hover{
+  transform: scale(1.1);
+}
+
+#sidenav-premium:hover{
+  transform: scale(1.1);
+}
+
+#sidenav-seaded:hover{
+  transform: scale(1.1);
+}
+
+#sidenav-tagasiside:hover{
+  transform: scale(1.1);
+}
+
+#sidenav-kkk:hover{
+  transform: scale(1.1);
+}
+
+.sideNavElement:hover{
+  cursor: pointer;
+}
+
+.st-menu div{
+  margin-top: 1rem;
+}
+.st-menu div:first-of-type{
+  margin-top:2.3rem;
+}
+.st-menu img{
+  margin-right:2rem;
+  /* https://angel-rs.github.io/css-color-filter-generator/ */
+  filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(392%) hue-rotate(257deg) brightness(119%) contrast(100%);
+  
+}
+/* end */
+/* 
+.input {
+  display: none;
+}
+
+.open {
+  background-color: var(--font-color-low-contrast-white);
+  width: 24px;
+  height: 4px;
+  display: block;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  z-index: 5;
+}
+
+.open:before {
+  content: "";
+  background-color: var(--font-color-low-contrast-white);
+  width: 24px;
+  height: 4px;
+  display: block;
+  border-radius: 2px;
+  position: relative;
+  top: -8px;
+  transform: rotate(0deg);
+  transition: all 0.3s ease;
+}
+
+.open:after {
+  content: "";
+  background-color: var(--font-color-low-contrast-white);
+  width: 24px;
+  height: 4px;
+  display: block;
+  border-radius: 2px;
+  position: relative;
+  top: 4px;
+  transform: rotate(0deg);
+  transition: all 0.3s ease;
+}
+
+.menuOpen {
+  margin-right: 1.6em;
+  display: block;
+  cursor: pointer;
+  float: right;
+}
+
+.menuOpen:hover .open:before {
+  top: -9px;
+}
+
+.menuOpen:hover .open:after {
+  top: 5px;
+}
+
+.menu {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: var(--purple2);
+  z-index: 3;
+}
+
+.menu label {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background-size: 100%;
+  cursor: pointer;
+}
+
+.menu .menuContent {
+  position: relative;
+  top: 45%;
+  font-size: 54px;
+  text-align: center;
+  padding-bottom: 20px;
+  margin-top: -170px;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.menu ul li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s;
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+
+.menu ul li a:hover {
+  color: var(--purple2);
+}
+
+.menu ul li:hover {
+  background: white;
+}
+
+.menuEffects {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+.menuEffects ul {
+  transform: translateY(0%);
+  transition: all 0.5s;
+}
+
+#menuToggle:checked ~ .menuEffects {
+  opacity: 100%;
+  visibility: visible;
+  transition: opacity 0.4s;
+}
+
+#menuToggle:checked ~ .menuEffects ul {
+  opacity: 100%;
+}
+
+#menuToggle:checked ~ .menuOpen .open {
+  background-color: transparent;
+}
+
+#menuToggle:checked ~ .menuOpen .open:before {
+  content: "";
+  background-color: white;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+#menuToggle:checked ~ .menuOpen .open:after {
+  content: "";
+  background-color: white;
+  transform: rotate(-45deg);
+  position: relative;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+#menuToggle:not(:checked) ~ .menuEffects ul {
+  transform: translateY(-30%);
+}
+ */
