@@ -148,8 +148,9 @@ homebtns.forEach(homebtn => {
 
 
   main1.classList.add("active-tab");
-  
-  document.getElementById("menuToggle").checked = false;
+  try{
+    document.getElementById("menuToggle").checked = false;
+  }catch{console.log("no homebtn: " + homebtn)}
 
   console.log("Clicked home button");
   
@@ -624,7 +625,7 @@ function navbarBtnClicks(data){
 function appendDataToEkoolScreen(response){
     if(!userData.accessToken){
       setCookie("ekoolAccessToken",response.data.ekool.accessToken,14)
-     upsertAccTokenToSupa(response.data.ekool.accessToken, "");
+     //upsertAccTokenToSupa(response.data.ekool.accessToken, "");
     }
     if(response.data.ekool.accessToken != "") {
       userData.ekoolAccessToken = response.data.ekool.accessToken
