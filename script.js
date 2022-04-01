@@ -48,7 +48,10 @@ let userData = {
   className: "",
   ekoolFeed:{}
 }
-
+if (getCookie("ekoolAccessToken") != ""){
+  console.log("token saved")
+  userData.ekoolAccessToken = getCookie("ekoolAccessToken");
+} 
 var registration = null;
 
 if ("serviceWorker" in navigator) {
@@ -435,7 +438,7 @@ logInEkoolBtn.addEventListener("click", (e) => {
 
 async function logInToEkool(email,password){
 
-  await axios.post('https://eviiking.tt23.repl.co/ekool/login', {
+  await axios.post('https://eviiking.herokuapp.com/ekool/login', {
     email: email,
     password: password
   })
@@ -466,7 +469,7 @@ async function upsertAccTokenToSupa(accessToken,refreshToken){
 
 async function getEkoolFeed(accessToken){
 console.log("getEkoolFeed()");
-  await axios.post('https://eviiking.tt23.repl.co/ekool/feed', {
+  await axios.post('https://eviiking.herokuapp.com/ekool/feed', {
     accessToken: accessToken
   })
   .then(async function (response) {
@@ -480,7 +483,7 @@ console.log("getEkoolFeed()");
 }
 async function getEkoolGradeData(accessToken){
 console.log("getEkoolFeed()");
-  await axios.post('https://eviiking.tt23.repl.co/ekool/gradeData', {
+  await axios.post('https://eviiking.herokuapp.com/ekool/gradeData', {
     accessToken: accessToken
   })
   .then(async function (response) {
@@ -620,6 +623,7 @@ function navbarBtnClicks(data){
 
 function appendDataToEkoolScreen(response){
     if(!userData.accessToken){
+      setCookie("ekoolAccessToken",response.data.ekool.accessToken,14)
      upsertAccTokenToSupa(response.data.ekool.accessToken, "");
     }
     if(response.data.ekool.accessToken != "") {
@@ -719,7 +723,7 @@ async function getStudentTasks(accessToken){
   inTwoWeeks = formatDate(new Date(inTwoWeeks));
   console.log("getStudentTasks()");
   //alert("today: "+today +" intwoweeks: " + inTwoWeeks);
-  await axios.post('https://eviiking.tt23.repl.co/ekool/studentTasks', {
+  await axios.post('https://eviiking.herokuapp.com/ekool/studentTasks', {
     accessToken: accessToken,
     start: today,
     end: inTwoWeeks
@@ -751,7 +755,7 @@ if(emptyAtStart.innerHTML.length == 0) {
 } */
 
 
-//TESTING STUFF
+
 appendChildToSection({ child:inlinediv, section:mainScreen});
 let className = getCookie("className");
 if(!className) console.log("no cookie(classname)")
@@ -789,7 +793,7 @@ var menu = document.querySelector('#st-container');
   console.log();
 });
 
-//TESTING ENDS
+
 
 $("#sidenav-premium").on('click', function (e) {
   //var premiumScreen = document.getElementById('premiumScreen');

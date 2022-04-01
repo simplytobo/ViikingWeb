@@ -1,7 +1,7 @@
 
-function setCookie(name, value ){
+function setCookie(name, value, expireIn ){
   const d = new Date();
-  let expireIn = 3000 //days
+  if(!expireIn) expireIn = 3000 //days
   d.setTime(d.getTime() + (expireIn*24*60*60*1000));
   let expires = "expires=" + d.toUTCString();
   document.cookie = name + "=" + value + ";" + expires+";";

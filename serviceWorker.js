@@ -1,7 +1,8 @@
 
-try {
 
 self.addEventListener("fetch", function(event) {  
+  console.log("Hey")
+  if (event.request.url.includes("google-analytics.com")) return;
   event.respondWith(
     caches.match(event.request).then(function(response) {
       return response || fetch(event.request);
@@ -52,9 +53,7 @@ self.addEventListener("notificationclick", function(event) {
     });
   }
 });
-} catch (error) {
-  console.log(error)
-}
+
 
     
 
