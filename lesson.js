@@ -120,7 +120,7 @@ function LessonsToMainScreen(timetable){
   ":" + ("0" + today.getMinutes()).slice(-2);
 
   
-  if(dayNum >= 1 && dayNum <= 5){
+  if(dayNum >= 1 && dayNum < 5){
     console.log(currentTime)
     LessonsHeaderInfo("00:00", "08:00",lesStart[0], dayNum, 1,currentTime);   
     LessonsHeaderInfo("08:01", "08:55",lesStart[1], dayNum, 2,currentTime);
