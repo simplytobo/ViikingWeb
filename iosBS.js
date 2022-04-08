@@ -33,5 +33,5 @@ if(navigator.userAgent.indexOf("Safari") != -1)
    //document.getElementsByTagName("body")[0].style.touchAction = "pan-y";
    document.body.style.touchAction = "auto";
     document.body.style.overflow = "";
-} 
+}
 
