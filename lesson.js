@@ -273,7 +273,13 @@ $("#overlayScreen").on('click', function(e) {
     $("#optionsDropdown").addClass("hide");
   }
 });
-
+$("#overlayScreen").on('click', function(e) {
+  if ($(e.target).closest("#overlayBoxWrapper").length === 0) {
+    $("#main-screen-id").removeClass("blur")
+    $("#overlayScreen").addClass("hide")
+    $("#optionsDropdown").addClass("hide");
+  }
+});
 function showLessonOptions(lessonInfo) {
 
 }

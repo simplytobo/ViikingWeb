@@ -732,6 +732,7 @@ async function getStudentTasks(accessToken){
   .then(function (response) {
    
     tasks = response.data.tasks.eventList;
+
   })  
   .catch(function (error) {
     alert("error in getStudentTasks(): " + error);
@@ -788,7 +789,7 @@ images.forEach((image) => {
 
 $("#MenuHamburger").on('click', function (e) {
 var menu = document.querySelector('#st-container');
-  
+  $("#closeNav").removeClass("hide")
   menu.classList.toggle("st-effect-1");
   menu.classList.toggle('st-menu-open');
   console.log();
@@ -816,7 +817,12 @@ $("#tagasisideBackBtn").on('click', function (e) {
   $("#feedback-form-id").addClass("hide")
   //appendChildToSection({ child:inlinediv, section:premiumScreen});
 });
-
+$("#closeNav").on('click', function (e) {
+  //var premiumScreen = document.getElementById('premiumScreen');
+  document.getElementById("MenuHamburger").click()
+  $("#closeNav").addClass("hide")
+  //appendChildToSection({ child:inlinediv, section:premiumScreen});
+});
 
 
 /* changeActive()
