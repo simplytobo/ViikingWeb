@@ -1,3 +1,6 @@
 1. close side navbar when click outside navbar
 2. when loging into ekool give an option for automatic log in. (checkbox)
 3. cache files, and push updates by addding  href="....?v=1" ; ...?v=2 etc
+
+
+https://docs.google.com/presentation/d/1z-UrLpPToSvoypijOwuIhugSb_kSmwzNwEM3iHndsx4/edit?usp=drivesdk

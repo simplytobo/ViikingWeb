@@ -1,5 +1,6 @@
 {
     "theme_color": "#8237F5",
+    "start_url": ".",
     "background_color": "#6139b1",
     "display": "standalone",
     "app_name": "Viiking",

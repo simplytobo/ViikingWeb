@@ -789,7 +789,14 @@ images.forEach((image) => {
 
 $("#MenuHamburger").on('click', function (e) {
 var menu = document.querySelector('#st-container');
-  $("#closeNav").removeClass("hide")
+  if($("#MenuHamburger").is(":checked")){
+    $("#closeNav").removeClass("hide")
+    console.log("checked");
+  }
+  else{
+     $("#closeNav").addClass("hide");
+    console.log("not checked");
+  }
   menu.classList.toggle("st-effect-1");
   menu.classList.toggle('st-menu-open');
   console.log();
