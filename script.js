@@ -62,7 +62,7 @@ if ("serviceWorker" in navigator) {
         console.log("service worker registered");
         registration = reg;
       })
-      .catch(err => console.log("service worker not registered", err))
+      .catch(err => console.error(`Registration failed with ${err}`))
   })
 }
 try {
@@ -77,6 +77,7 @@ catch(e){
 
 function displayNotification() {
   if (Notification.permission === 'granted') {    
+    console.log("hey")
     registration.showNotification('Scanned an item');    
   }
 }

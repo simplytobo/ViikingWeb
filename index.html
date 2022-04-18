@@ -1,199 +1,201 @@
 <!DOCTYPE html>
 <html lang="et">
+
 <head>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>E-Viiking</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1, minimal-ui,user-scalable=no, viewport-fit=cover'>
-    <meta name="description" content="Tunniplaan, toit, Ekool - kõik ühest kohast ">
-    <meta name="keywords" content="TÜG, tunniplaan, toit, Tallinna Ühisgümnaasium, tundide ajad, tunnid">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="theme-color" content="#8237F5" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="">
-    <meta name="apple-mobile-web-app-title" content="Viiking">
-    <link rel="apple-touch-icon" href="images/viking-logo-ios.png">
-    <link rel="shortcut icon" type="image/png" href="images/viking-logo-Transparent.png" />
-    <link rel="apple-touch-startup-image" href="images/viking-logo-ios.png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://kit.fontawesome.com/ac53754ed5.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/@supabase/supabase-js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
-    <script src="https://js.stripe.com/v3/"></script>
-    <link rel="icon" href="images/viikingico.ico" type="image/x-icon">
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Viiking</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1, minimal-ui,user-scalable=no, viewport-fit=cover'>
+  <meta name="description" content="Tunniplaan, toit, Ekool - kõik ühest kohast ">
+  <meta name="keywords" content="TÜG, tunniplaan, toit, Tallinna Ühisgümnaasium, tundide ajad, tunnid">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#8237F5" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="">
+  <meta name="apple-mobile-web-app-title" content="Viiking">
+  <link rel="apple-touch-icon" href="images/viking-logo-ios.png">
+  <link rel="shortcut icon" type="image/png" href="images/viking-logo-Transparent.png" />
+  <link rel="apple-touch-startup-image" href="images/viking-logo-ios.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="https://kit.fontawesome.com/ac53754ed5.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <link rel="icon" href="images/viikingico.ico" type="image/x-icon">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <link href="navigation.css" rel="stylesheet" type="text/css" />
-    <link href="dark-mode.css" rel="stylesheet" type="text/css" />
-    <link href="loader.css" rel="stylesheet" type="text/css" />
-    <link href="dark.css" rel="stylesheet" type="text/css" />
-    <link href="animationBack.css" rel="stylesheet" type="text/css" />
-    
-    <link href="premium.css" rel="stylesheet" type="text/css" />
-    <link href="feedback.css" rel="stylesheet" type="text/css" />
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link rel="manifest" href="manifest.webmanifest.json" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DY08B9QPVW"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-DY08B9QPVW');
-    </script>
+  <link href="navigation.css" rel="stylesheet" type="text/css" />
+  <link href="dark-mode.css" rel="stylesheet" type="text/css" />
+  <link href="loader.css" rel="stylesheet" type="text/css" />
+  <link href="dark.css" rel="stylesheet" type="text/css" />
+  <link href="animationBack.css" rel="stylesheet" type="text/css" />
+
+  <link href="premium.css" rel="stylesheet" type="text/css" />
+  <link href="feedback.css" rel="stylesheet" type="text/css" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="manifest" href="manifest.webmanifest.json" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DY08B9QPVW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DY08B9QPVW');
+  </script>
 </head>
 
 <body class="dark-mode">
-    <!-- Offline screen -->
-    <div class="hide" style="width:100vw; height:100vh">
-        <h1>Internetiühendus puudub <br><br> </h1>
-        <p>1. Veendu, et internetiühendus oleks olemas.<br> </p>
-        <p>2. Vaata, kas server töötab -> <a href="https://stats.uptimerobot.com/Rn9oKuGKkv"> uptimerobot.com</a><br></p>
+  <!-- Offline screen -->
+  <div class="hide" style="width:100vw; height:100vh">
+    <h1>Internetiühendus puudub <br><br> </h1>
+    <p>1. Veendu, et internetiühendus oleks olemas.<br> </p>
+    <p>2. Vaata, kas server töötab -> <a href="https://stats.uptimerobot.com/Rn9oKuGKkv"> uptimerobot.com</a><br></p>
+  </div>
+  <section class="ekool-login hide screenClass" id="ekool-login-id">
+
+    <img id="home-icon-ekool-id" class="home-icon home-btn" src="images/home.png">
+    <img src="images/ekool.png" class="ekool-logo-login hide" id="ekool-logo-login">
+
+    <div class="ekool-input-divider">
+      <div class="ekool-input-divider-header">Ühenda Ekooliga</div>
+      <input autocomplete="off" class="ekool-input" placeholder="Email" type="text" name="" id="eKoolEmail">
+      <input autocomplete="off" class="ekool-input" placeholder="Ekooli salasõna" type="password" name=""
+        id="eKoolPassword">
+      <button id="logInEkool">Ühenda</button>
     </div>
-    <section class="ekool-login hide screenClass" id="ekool-login-id">
 
-        <img id="home-icon-ekool-id" class="home-icon home-btn" src="images/home.png">
-        <img src="images/ekool.png" class="ekool-logo-login hide" id="ekool-logo-login">
+    <div class="area">
+      <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
 
-        <div class="ekool-input-divider">
-            <div class="ekool-input-divider-header">Ühenda Ekooliga</div>
-            <input autocomplete="off" class="ekool-input" placeholder="Email" type="text" name="" id="eKoolEmail">
-            <input autocomplete="off" class="ekool-input" placeholder="Ekooli salasõna" type="password" name="" id="eKoolPassword">
-            <button id="logInEkool">Ühenda</button>
+  </section>
+
+
+  <section class="main-screen screenClass" id="main-screen-id">
+
+    <div class="home-screen" id="home-screen-id">
+
+      <div class="header-hue">
+        <div class="header-header">
+          <div class="change-class blinking" id="change-class">
+            Vali klass
+          </div>
+
+          <!--SideMenu-->
+          <div class="menu1 cross menu--1">
+            <label class="MenuLabel">
+              <input class="menu1Check" type="checkbox" id="MenuHamburger">
+              <svg viewBox="0 10 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+                <path class="line--2" d="M0 50h70" />
+                <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+              </svg>
+            </label>
+          </div>
         </div>
 
-        <div class="area">
-            <ul class="circles">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+        <p1 class="next-lesson-p-class" id="next-lesson-p-id"></p1>
+        <p1 class="next-lesson-classroom-p-class" id="next-lesson-classroom-p-id"></p1>
+        <p1 class="next-lesson-duration-p-class" id="next-lesson-duration-p-id"></p1>
+
+      </div>
+
+
+    </div>
+    <div id="st-container" class="st-container">
+      <nav class="st-menu st-effect-1">
+        <h1>Viiking</h1>
+
+        <div class="sideNavElement" id="sidenav-logisisse">
+          <img src="images/log-in.svg">
+          Logi sisse
         </div>
-
-    </section>
-
-
-    <section class="main-screen screenClass" id="main-screen-id">
-
-        <div class="home-screen" id="home-screen-id">
-
-            <div class="header-hue">
-                <div class="header-header">
-                    <div class="change-class blinking" id="change-class">
-                        Vali klass
-                    </div>
-
-                    <!--SideMenu-->
-                    <div class="menu1 cross menu--1">
-                        <label class="MenuLabel">
-                            <input class="menu1Check" type="checkbox" id="MenuHamburger">
-                            <svg viewBox="0 10 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
-                                <path class="line--2" d="M0 50h70" />
-                                <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
-                            </svg>
-                        </label>
-                    </div>
-                </div>
-
-                <p1 class="next-lesson-p-class" id="next-lesson-p-id"></p1>
-                <p1 class="next-lesson-classroom-p-class" id="next-lesson-classroom-p-id"></p1>
-                <p1 class="next-lesson-duration-p-class" id="next-lesson-duration-p-id"></p1>
-
-            </div>
-
-
+        <div class="sideNavElement" id="sidenav-andmed">
+          <img src="images/user.svg">
+          Andmed
         </div>
-        <div id="st-container" class="st-container">
-            <nav class="st-menu st-effect-1">
-                <h1>E-Viiking</h1>
-
-                <div class="sideNavElement" id="sidenav-logisisse">
-                    <img src="images/log-in.svg">
-                    Logi sisse
-                </div>
-                <div class="sideNavElement" id="sidenav-andmed">
-                    <img src="images/user.svg">
-                    Andmed
-                </div>
-                <div class="sideNavElement" id="sidenav-premium">
-                    <img src="images/cloud.svg">
-                    Premium
-                </div>
-                <div class="sideNavElement" id="sidenav-seaded">
-                    <img src="images/settings.svg">
-                    Seaded
-                </div>
-                <div class="sideNavElement" id="sidenav-tagasiside">
-                    <img src="images/send.svg">
-                    Tagasiside
-                </div>
-                <div class="sideNavElement" id="sidenav-kkk">
-                    <img src="images/help-circle.svg">
-                    KKK
-                </div>
-              <div class="sideNavElement" id="sidenav-kkk">
-                    <img src="images/help-circle.svg">
-                    Download
-                </div>
-              <div id="closeNav"class="hide closeNav"></div>
-            </nav>
+        <div class="sideNavElement" id="sidenav-premium">
+          <img src="images/cloud.svg">
+          Premium
         </div>
-        <div class="day-today" id="day-today-id">
-            <p1 class="today-text" id="today-text-id">
-                Esmaspäev</p1>
+        <div class="sideNavElement" id="sidenav-seaded">
+          <img src="images/settings.svg">
+          Seaded
         </div>
-
-
-        <!--         <div id='progressbar1'></div> -->
-        <div class="main-screen-div-centering">
-            <div class="timetable-today" id="timetable-today-id">
-
-            </div>
-
-            <div class="main-screen-div-right hide" id="main-screen-div-right-id">
-
-            </div>
+        <div class="sideNavElement" id="sidenav-tagasiside">
+          <img src="images/send.svg">
+          Tagasiside
         </div>
-
-    </section>
-    <section class="overlayScreen screenClass hide" id="overlayScreen">
-        <div class="overlayBoxWrapper" id="overlayBoxWrapper">
-            <div class="ol-info" id="olNum"></div>
-            <div class="ol-info" id="olLesson">
-                <p>text</p>
-                <img class="downArrow" src="images/downArrow.svg"></i>
-                <div class="hide" id="optionsDropdown">PHolder1<br>PHolder2</div>
-            </div>
-            <div class="ol-info" id="olClass">Loading...</div>
-            <div class="ol-info" id="olTeacher"></div>
-            <div class="ol-info" id="olTimes"></div>
+        <div class="sideNavElement" id="sidenav-kkk">
+          <img src="images/help-circle.svg">
+          KKK
         </div>
-    </section>
-
-    <section class="profile-screen screenClass hide" id="profile-screen-id">
-
-        <div class="background-hue-class" id="background-hue">
-            <img src="images/home.png" class="home-icon home-btn" id="home-icon-id">
-
-            <img src="images/user.png" class="pfp-class" id="pfp-id">
-            <p1 class="pfp-name" id="pfp-name-id">username</p1>
-
+        <div class="sideNavElement" id="sidenav-kkk">
+          <img src="images/help-circle.svg">
+          Download
         </div>
+        <div id="closeNav" class="hide closeNav"></div>
+      </nav>
+    </div>
+    <div class="day-today" id="day-today-id">
+      <p1 class="today-text" id="today-text-id">
+        Esmaspäev</p1>
+    </div>
+
+
+    <!--         <div id='progressbar1'></div> -->
+    <div class="main-screen-div-centering">
+      <div class="timetable-today" id="timetable-today-id">
+
+      </div>
+
+      <div class="main-screen-div-right hide" id="main-screen-div-right-id">
+
+      </div>
+    </div>
+
+  </section>
+  <section class="overlayScreen screenClass hide" id="overlayScreen">
+    <div class="overlayBoxWrapper" id="overlayBoxWrapper">
+      <div class="ol-info" id="olNum"></div>
+      <div class="ol-info" id="olLesson">
+        <p>text</p>
+        <img class="downArrow" src="images/downArrow.svg"></i>
+        <div class="hide" id="optionsDropdown">PHolder1<br>PHolder2</div>
+      </div>
+      <div class="ol-info" id="olClass">Loading...</div>
+      <div class="ol-info" id="olTeacher"></div>
+      <div class="ol-info" id="olTimes"></div>
+    </div>
+  </section>
+
+  <section class="profile-screen screenClass hide" id="profile-screen-id">
+
+    <div class="background-hue-class" id="background-hue">
+      <img src="images/home.png" class="home-icon home-btn" id="home-icon-id">
+
+      <img src="images/user.png" class="pfp-class" id="pfp-id">
+      <p1 class="pfp-name" id="pfp-name-id">username</p1>
+
+    </div>
 
 
 
-        <!--         <div class="profile-settings" id="profile-settings-id">
+    <!--         <div class="profile-settings" id="profile-settings-id">
         <div class="option-icon" id="option1-icon"><img src="images/user-icon.png" class="usericon-class"><p1 class="profile-option" id="option-1">Profiil</p1></div>
         <div class="option-icon" id="option2-icon"><img src="images/notification.png" class="notif-class"><p1 class="profile-option" id="option-2">Teated</p1></div>
           <p1 class="profile-option" id="option-3">Option</p1>
@@ -201,133 +203,137 @@
           <p1 class="profile-option" id="option-5">Option</p1>
         </div> -->
 
-        <div class="profile-settings">
-            <div class="squarediv">
-                <div class="squareoption" id="squareoption1-id"></div>
-                <div class="squareoption" id="squareoption2-id"></div>
-            </div>
+    <div class="profile-settings">
+      <div class="squarediv">
+        <div class="squareoption" id="squareoption1-id"></div>
+        <div class="squareoption" id="squareoption2-id"></div>
+      </div>
 
-            <div class="squarediv">
-                <div class="squareoption" id="squareoption3-id"></div>
-                <div class="squareoption" id="squareoption4-id" onclick="highlightButton()">
-                    <img src="images/flashlight.png" class="flashlight-pfp" id="flashlight-pfp-id">
-                </div>
-            </div>
-
-            <div class="log-out-btn" id="log-out-div-id">Logi välja</div>
+      <div class="squarediv">
+        <div class="squareoption" id="squareoption3-id"></div>
+        <div class="squareoption" id="squareoption4-id" onclick="highlightButton()">
+          <img src="images/flashlight.png" class="flashlight-pfp" id="flashlight-pfp-id">
         </div>
+      </div>
+
+      <div class="log-out-btn" id="log-out-div-id">Logi välja</div>
+    </div>
 
 
 
-    </section>
+  </section>
 
-    <section class="login-screen hide" id="login-screen-id">
-
-
-
-        <div class="login-background" id="login-background-id">
-            <img src="images/viking-logo-Transparent.png" class="viiking-logo-login" id="viking-logo-login">
-            <div class="login-divider" id="login-divider-id">
-                <input autocomplete="username" type="email" class="login-input" id="login-input-email" placeholder="Email" />
-                <input autocomplete="current-password" type="password" class="login-input" id="login-input-pass" placeholder="Password" />
-                <div class="loginButtonsWrapper">
-                    <button type="button" class="login-button" id="login-button-id">Logi sisse</button>
-                    <button type="button" class="signup-button" id="signup-button-id">Registreeru</button>
-                </div>
-            </div>
-
-            <div class="area">
-                <ul class="circles">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
-    </section>
-
-    <section class="loading-screen screenClass hide" id="loading-screen-id">
-
-        <div id="loader">
-            <div id="shadow"></div>
-            <div id="box"></div>
+  <section class="login-screen hide" id="login-screen-id">
 
 
+
+    <div class="login-background" id="login-background-id">
+      <img src="images/viking-logo-Transparent.png" class="viiking-logo-login" id="viking-logo-login">
+      <div class="login-divider" id="login-divider-id">
+        <input autocomplete="username" type="email" class="login-input" id="login-input-email" placeholder="Email" />
+        <input autocomplete="current-password" type="password" class="login-input" id="login-input-pass"
+          placeholder="Password" />
+        <div class="loginButtonsWrapper">
+          <button type="button" class="login-button" id="login-button-id">Logi sisse</button>
+          <button type="button" class="signup-button" id="signup-button-id">Registreeru</button>
         </div>
+      </div>
+
+      <div class="area">
+        <ul class="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+  </section>
+
+  <section class="loading-screen screenClass hide" id="loading-screen-id">
+
+    <div id="loader">
+      <div id="shadow"></div>
+      <div id="box"></div>
 
 
-    </section>
+    </div>
 
 
-    <section class="timetable screenClass hide">
+  </section>
 
-        <div class="background-hue-class-timetable" id="background-hue-timetable">
-            <img id="home-icon-timetable-id" class="home-icon home-btn" src="images/home.png">
-        </div>
-        <div class="ttcenter">
-            <var class="rows-Wrapper" id="rowsWrapper">
-                <var class="column-Wrapper column-Times"></var>
-            </var>
-        </div>
-    </section>
-    <section class="timetable screenClass hide" id="timetable-id">
-        <div class="header-timetable-div">
-            <div class="backBtn" id="timetableBackBtn">Tagasi</div>
-        </div>
-        <div class="iframeWrapper">
 
-            <iframe id="timetableiframe" loading="lazy" class="lazy-image" data-src="https://tyhg.edu.ee/tunniplaan/index_12A.htm" frameborder="0"> </iframe>
-            <div class="zoomBtnsWrapper">
+  <section class="timetable screenClass hide">
+
+    <div class="background-hue-class-timetable" id="background-hue-timetable">
+      <img id="home-icon-timetable-id" class="home-icon home-btn" src="images/home.png">
+    </div>
+    <div class="ttcenter">
+      <var class="rows-Wrapper" id="rowsWrapper">
+        <var class="column-Wrapper column-Times"></var>
+      </var>
+    </div>
+  </section>
+  <section class="timetable screenClass hide" id="timetable-id">
+    <div class="header-timetable-div">
+      <div class="backBtn" id="timetableBackBtn">Tagasi</div>
+    </div>
+    <div class="iframeWrapper">
+
+      <iframe id="timetableiframe" loading="lazy" class="lazy-image"
+        data-src="https://tyhg.edu.ee/tunniplaan/index_12A.htm" frameborder="0"> </iframe>
+      <!--  <div class="zoomBtnsWrapper">
                 <div class="zoomBtn" id="zoomIn"><img src="images/zoom-in.svg"></div>
                 <div class="zoomBtn" id="zoomOut"><img src="images/zoom-out.svg"></div>
-            </div>
+            </div> -->
+    </div>
+  </section>
+
+  <section class="optionsScreen screenClass hide" id="optionsScreenId">
+    <div class="optionsWrapper" id="optionsWrapperId">
+      <div class="optionsNextBtn" id="optionsNextBtnId">Jätka</div>
+    </div>
+
+  </section>
+
+  <section class="ekoolFeedScreen hide screenClass" id="ekoolFeedScreen">
+    <div class="feedHeader" id="feedHeader">
+      <img alt="home button" id="home-icon-ekool-id" class="home-icon-ekool home-btn" src="images/home.png">
+      <div class="feedHeaderUserName" id="feedHeaderUserName">loading...</div>
+      <img alt="refresh" id="feedHeaderRefreshBtn" class="feedHeaderRefreshBtn" src="images/refresh-cw.svg">
+
+    </div>
+    <div class="feedWrapper" id="feedWrapper">
+      <div class="feedItemWrapper">
+        <div class="feedItemGrade"></div>
+        <div class="feedItemInfoWrapper">
+          <div class="feedItemLessonName"></div>
+          <div class="feedItemDescription"></div>
+          <div class="feedItemTeacher"></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
+  <section class="foodScreen screenClass hide" id="foodScreen">
 
-    <section class="optionsScreen screenClass hide" id="optionsScreenId">
-        <div class="optionsWrapper" id="optionsWrapperId">
-            <div class="optionsNextBtn" id="optionsNextBtnId">Jätka</div>
-        </div>
+    <div class="backBtn" id="foodBackBtn">Tagasi</div>
+    <div class="iframeWrapper">
 
-    </section>
+      <iframe id="foodiframe" class="lazy-image"
+        data-src="https://view.officeapps.live.com/op/embed.aspx?src=https://www.tyhg.edu.ee/wp/wp-content/uploads/2022/04/18-22.04.22-Koolilouna-menuu.docx"
+        frameborder="0"></iframe>
 
-    <section class="ekoolFeedScreen hide screenClass" id="ekoolFeedScreen">
-        <div class="feedHeader" id="feedHeader">
-            <img alt="home button" id="home-icon-ekool-id" class="home-icon-ekool home-btn" src="images/home.png">
-            <div class="feedHeaderUserName" id="feedHeaderUserName">loading...</div>
-            <img alt="refresh" id="feedHeaderRefreshBtn" class="feedHeaderRefreshBtn" src="images/refresh-cw.svg">
+    </div>
 
-        </div>
-        <div class="feedWrapper" id="feedWrapper">
-            <div class="feedItemWrapper">
-                <div class="feedItemGrade"></div>
-                <div class="feedItemInfoWrapper">
-                    <div class="feedItemLessonName"></div>
-                    <div class="feedItemDescription"></div>
-                    <div class="feedItemTeacher"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="foodScreen screenClass hide" id="foodScreen">
-
-        <div class="backBtn" id="foodBackBtn">Tagasi</div>
-        <div class="iframeWrapper">
-
-            <iframe id="foodiframe" class="lazy-image" data-src="https://view.officeapps.live.com/op/embed.aspx?src=https://www.tyhg.edu.ee/wp/wp-content/uploads/2022/03/28.03-01.04-Koolilouna-menuu.docx" frameborder="0"></iframe>
-
-        </div>
-
-    </section>
-    <section class="tasksScreen hide screenClass " id="tasksScreen">
-        <div class="allTasksWrapper" id="allTasksWrapper">
-            <!--  <div class="dayWrapper hide">
+  </section>
+  <section class="tasksScreen hide screenClass " id="tasksScreen">
+    <div class="allTasksWrapper" id="allTasksWrapper">
+      <!--  <div class="dayWrapper hide">
           <div class="dayHeader">Homsed ülesanded <span>E 21.veebruar</span></div>
           <div class="taskWrapper">
             <div class="taskHeader">Ulesanded 21 vihikust</div>
@@ -337,157 +343,157 @@
           </div>        -->
 
 
-        </div>
-        </div>
-    </section>
-    <section class="PremimumScreen hide screenClass " id="premiumScreen">
+    </div>
+    </div>
+  </section>
+  <section class="PremimumScreen hide screenClass " id="premiumScreen">
 
-        <!--       <div class="imageWrapper"></div>
+    <!--       <div class="imageWrapper"></div>
       EViiking Premium
       algab 1 euro / kuus
       
       <button>Vali plaan</button> -->
-        <div class="backBtn" id="premBackBtn">Tagasi</div>
-        <div class="containerprem">
+    <div class="backBtn" id="premBackBtn">Tagasi</div>
+    <div class="containerprem">
 
-            <div class="columnprem">
-                <div class="pricing-card eco">
-                    <div class="popular">POPULAARNE</div>
-                    <div class="pricing-header">
-                        <span class="plan-title">AASTANE PAKETT</span>
-                        <div class="price-circle">
-                            <span class="price-title">
-                                <small>€</small><span>9.99</span>
-                            </span>
-                            <span class="info">/ Aasta</span>
-                        </div>
-                    </div>
-                    <div class="badge-box">
-                        <span>Säästa 16%</span>
-                    </div>
-                    <ul>
-                        <li>
-                            <strong>Midagi</strong> head
-                        </li>
-                        <li>
-                            <strong>Palju </strong> tunniplaani
-                        </li>
-                        <li>
-                            <strong>Kasutajasõbralik</strong> rakendus
-                        </li>
-                        <li>
-                            <strong>Palju </strong> menüüd
-                        </li>
-                        <li>
-                            <strong>Suurepärane</strong> kasutajaliides
-                        </li>
-                    </ul>
-                    <form action="https://eviiking.herokuapp.com/payments/create-checkout-session" method="POST">
-                        <!-- Add a hidden field with the lookup_key of your Price -->
-                        <input type="hidden" name="lookup_key" value="premium999" />
-                        <div>
-                        </div>
-                        <div class="buy-button-box">
-                            <button class="buy-now" id="checkout-and-portal-button" type="submit">Telli</button>
-                        </div>
-                    </form>
-
-                </div>
+      <div class="columnprem">
+        <div class="pricing-card eco">
+          <div class="popular">POPULAARNE</div>
+          <div class="pricing-header">
+            <span class="plan-title">AASTANE PAKETT</span>
+            <div class="price-circle">
+              <span class="price-title">
+                <small>€</small><span>9.99</span>
+              </span>
+              <span class="info">/ Aasta</span>
             </div>
-            <div class="columnprem">
-                <div class="pricing-card pro">
-                    <div class="pricing-header">
-                        <span class="plan-title">KUUNE PAKETT</span>
-                        <div class="price-circle">
-                            <span class="price-title">
-                                <small>€</small><span>0.99</span>
-                            </span>
-                            <span class="info">/ Kuu</span>
-                        </div>
-                    </div>
-                    <div class="badge-box">
-                        <span>Säästa 8%</span>
-                    </div>
-                    <ul>
-                        <li>
-                            <strong>Midagi</strong> head
-                        </li>
-                        <li>
-                            <strong>Palju </strong> tunniplaani
-                        </li>
-                        <li>
-                            <strong>Kasutajasõbralik</strong> rakendus
-                        </li>
-                        <li>
-                            <strong>Palju </strong> menüüd
-                        </li>
-                        <li>
-                            <strong>Suurepärane</strong> kasutajaliides
-                        </li>
-                    </ul>
-                    <form action="https://eviiking.herokuapp.com/payments/create-checkout-session" method="POST">
-                        <!-- Add a hidden field with the lookup_key of your Price -->
-                        <input type="hidden" name="lookup_key" value="premium099" />
-                        <div>
-                        </div>
-                        <div class="buy-button-box">
-                            <button class="buy-now" id="checkout-and-portal-button" type="submit">Telli</button>
-                        </div>
-                    </form>
-
-                </div>
+          </div>
+          <div class="badge-box">
+            <span>Säästa 16%</span>
+          </div>
+          <ul>
+            <li>
+              <strong>Midagi</strong> head
+            </li>
+            <li>
+              <strong>Palju </strong> tunniplaani
+            </li>
+            <li>
+              <strong>Kasutajasõbralik</strong> rakendus
+            </li>
+            <li>
+              <strong>Palju </strong> menüüd
+            </li>
+            <li>
+              <strong>Suurepärane</strong> kasutajaliides
+            </li>
+          </ul>
+          <form action="https://eviiking.herokuapp.com/payments/create-checkout-session" method="POST">
+            <!-- Add a hidden field with the lookup_key of your Price -->
+            <input type="hidden" name="lookup_key" value="premium999" />
+            <div>
             </div>
+            <div class="buy-button-box">
+              <button class="buy-now" id="checkout-and-portal-button" type="submit">Telli</button>
+            </div>
+          </form>
+
         </div>
-
-    </section>
-
-    <section class="feedback-form hide" id="feedback-form-id">
-      <div class="backBtn" id="tagasisideBackBtn">Tagasi</div>
-
-      <div class="wrappertagasi">
-        <h2>Tagasiside</h2>
-        <div id="error_message"></div>
-        <div id="success_message"></div>
-<!--         <form id="myform" onsubmit="return validate();">
-           -->
-          <div class="input_field">
-              <input type="text" placeholder="Email" id="email">
-          </div>
-          <div class="input_field">
-              <textarea placeholder="Sinu tagasiside" id="yourfeedback"></textarea>
-          </div>
-
-          <button id="submitBtnFB" onclick="validate();"></button>
-
-<!--         </form> -->
       </div>
-      
-    </section>
-                                  
-    <section class="gradesScreen screenClass hide" id="gradesScreen">
-        <h1>Coming Soon..</h1>
-    </section>
+      <div class="columnprem">
+        <div class="pricing-card pro">
+          <div class="pricing-header">
+            <span class="plan-title">KUUNE PAKETT</span>
+            <div class="price-circle">
+              <span class="price-title">
+                <small>€</small><span>0.99</span>
+              </span>
+              <span class="info">/ Kuu</span>
+            </div>
+          </div>
+          <div class="badge-box">
+            <span>Säästa 8%</span>
+          </div>
+          <ul>
+            <li>
+              <strong>Midagi</strong> head
+            </li>
+            <li>
+              <strong>Palju </strong> tunniplaani
+            </li>
+            <li>
+              <strong>Kasutajasõbralik</strong> rakendus
+            </li>
+            <li>
+              <strong>Palju </strong> menüüd
+            </li>
+            <li>
+              <strong>Suurepärane</strong> kasutajaliides
+            </li>
+          </ul>
+          <form action="https://eviiking.herokuapp.com/payments/create-checkout-session" method="POST">
+            <!-- Add a hidden field with the lookup_key of your Price -->
+            <input type="hidden" name="lookup_key" value="premium099" />
+            <div>
+            </div>
+            <div class="buy-button-box">
+              <button class="buy-now" id="checkout-and-portal-button" type="submit">Telli</button>
+            </div>
+          </form>
 
-    <div class="inlinediv hide" id="inlinediv">
-        <img src="images/schedule.png" class="main-squareoption" id="mainoption1-id" alt="tunniplaan"></img>
-        <img src="images/menu.png" class="main-squareoption" id="mainoption2-id" alt="toidud"></img>
-        <img src="images/ekool.png" class="main-squareoption" id="mainoption3-id" alt="ekool"></img>
-        <img src="images/list.png" class="main-squareoption" id="mainoption5-id" alt="ekool hinded"></img>
-        <img src="images/grade.png" class="main-squareoption" id="mainoption4-id" alt="ekool hinded 2"></img>
+        </div>
+      </div>
     </div>
 
-    <!--  test -->
-    <!--  <script src="serviceWorker.js"></script> -->
-    <script src="cookies.js"></script>
-    <script src="helperScripts.js"></script>
-    <script src="createElem.js"></script>
-    <script src="iosBS.js"></script>
-    <script src="script.js"></script>
-    <script src="lesson.js"></script>
-    <script src="themeSwitcher.js"></script>
-   
-    <script src="feedbackjs.js"></script>
-    <script src="notifications.js"></script>
+  </section>
+
+  <section class="feedback-form hide" id="feedback-form-id">
+    <div class="backBtn" id="tagasisideBackBtn">Tagasi</div>
+
+    <div class="wrappertagasi">
+      <h2>Tagasiside</h2>
+      <div id="error_message"></div>
+      <div id="success_message"></div>
+      <!--         <form id="myform" onsubmit="return validate();">
+           -->
+      <div class="input_field">
+        <input type="text" placeholder="Email" id="email">
+      </div>
+      <div class="input_field">
+        <textarea placeholder="Sinu tagasiside" id="yourfeedback"></textarea>
+      </div>
+
+      <button id="submitBtnFB" onclick="validate();"></button>
+
+      <!--         </form> -->
+    </div>
+
+  </section>
+
+  <section class="gradesScreen screenClass hide" id="gradesScreen">
+    <h1>Coming Soon..</h1>
+  </section>
+
+  <div class="inlinediv hide" id="inlinediv">
+    <img src="images/schedule.png" class="main-squareoption" id="mainoption1-id" alt="tunniplaan"></img>
+    <img src="images/menu.png" class="main-squareoption" id="mainoption2-id" alt="toidud"></img>
+    <img src="images/ekool.png" class="main-squareoption" id="mainoption3-id" alt="ekool"></img>
+    <img src="images/list.png" class="main-squareoption" id="mainoption5-id" alt="ekool hinded"></img>
+    <img src="images/grade.png" class="main-squareoption" id="mainoption4-id" alt="ekool hinded 2"></img>
+  </div>
+
+  <!--  test -->
+  <!--  <script src="serviceWorker.js"></script> -->
+  <script src="cookies.js"></script>
+  <script src="helperScripts.js"></script>
+  <script src="createElem.js"></script>
+  <script src="iosBS.js"></script>
+  <script src="script.js"></script>
+  <script src="lesson.js"></script>
+  <script src="themeSwitcher.js"></script>
+
+  <script src="feedbackjs.js"></script>
+  <script src="notifications.js"></script>
 
 
 

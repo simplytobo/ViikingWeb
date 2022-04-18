@@ -1,60 +1,107 @@
+const deleteCache = async key => {
+  await caches.delete(key)
+}
 
+const deleteOldCaches = async () => {
+   const cacheKeepList = ['v4'];
+   const keyList = await caches.keys()
+   const cachesToDelete = keyList.filter(key => !cacheKeepList.includes(key))
+   await Promise.all(cachesToDelete.map(deleteCache));
+}
 
+self.addEventListener('activate', (event) => {
+  event.waitUntil(deleteOldCaches());
+});
 
+const addResourcesToCache = async (resources) => {
+  const cache = await caches.open('v4');
+  await cache.addAll(resources);
+};
 
+const putInCache = async (request, response) => {
+  const cache = await caches.open('v4');
 
-/* const cacheName = 'MyFancyCacheName_v4';
-const precachedAssets = [
-  '/offline.html',
-  '/style.css'
-]
-self.addEventListener('fetch', (event) => {
-  // Check if this is a request for an image
-  if (event.request.destination === 'image') {
-    event.respondWith(caches.open(cacheName).then((cache) => {
-      // Go to the cache first
-      cache.match(event.request.url).then((cachedResponse) => {
-        // Return a cached response if we have one
-        if (cachedResponse) {
-          return cachedResponse;
-        }
+  await cache.put(request, response);
+};
 
-        // Otherwise, hit the network
-        return fetch(event.request).then((fetchedResponse) => {
-          // Add the network response to the cache for later visits
-          cache.put(event.request, fetchedResponse.clone());
-
-          // Return the network response
-          return fetchedResponse;
-        });
-      }).catch(function() {
-      // If both fail, show a generic fallback:
-      return caches.match('/offline.html');
-      // However, in reality you'd have many different
-      // fallbacks, depending on URL & headers.
-      // Eg, a fallback silhouette image for avatars.
-    })
-    }));
-  } else {
-    return;
+const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
+  // First try to get the resource from the cache
+  const responseFromCache = await caches.match(request);
+  if (responseFromCache) {
+    return responseFromCache;
   }
-}); */
-/* self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    // Try the cache
-    caches.match(event.request).then(function(response) {
-      // Fall back to network
-      return response || fetch(event.request);
-    }).catch(function() {
-      // If both fail, show a generic fallback:
-      return caches.match('/offline.html');
-      // However, in reality you'd have many different
-      // fallbacks, depending on URL & headers.
-      // Eg, a fallback silhouette image for avatars.
+
+  // Next try to use the preloaded response, if it's there
+  const preloadResponse = await preloadResponsePromise;
+  if (preloadResponse) {
+    console.info('using preload response', preloadResponse);
+    putInCache(request, preloadResponse.clone());
+    return preloadResponse;
+  }
+
+  // Next try to get the resource from the network
+  try {
+    const responseFromNetwork = await fetch(request);
+    // response may be used only once
+    // we need to save clone to put one copy in cache
+    // and serve second one
+    putInCache(request, responseFromNetwork.clone());
+    return responseFromNetwork;
+  } catch (error) {
+    const fallbackResponse = await caches.match(fallbackUrl);
+    if (fallbackResponse) {
+      return fallbackResponse;
+    }
+    // when even the fallback response is not available,
+    // there is nothing we can do, but we must always
+    // return a Response object
+    return new Response('Network error happened', {
+      status: 408,
+      headers: { 'Content-Type': 'text/plain' },
+    });
+  }
+};
+
+const enableNavigationPreload = async () => {
+  if (self.registration.navigationPreload) {
+    // Enable navigation preloads!
+    await self.registration.navigationPreload.enable();
+  }
+};
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(enableNavigationPreload());
+});
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    addResourcesToCache([
+      '/index.html',
+      '/style.css',
+      '/offline.html',
+      '/images/viking-logo-Transparent.png'
+    ])
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+    if((event.request.url.indexOf('http') === 0)){ 
+      console.log('hey ffrom');
+      event.respondWith(
+    cacheFirst({
+      request: event.request,
+      preloadResponsePromise: event.preloadResponse,
+      fallbackUrl: '/offline.html',
     })
   );
-}); */
-self.addEventListener('fetch', function(event) {
+  }
+
+});
+
+
+
+/* self.addEventListener('fetch', function(event) {
+  console.info("hey form service;")
   event.respondWith(
     caches.open('mysite-dynamic').then(function(cache) {
       return fetch(event.request).then(function(response) {
@@ -75,7 +122,7 @@ self.addEventListener('fetch', function(event) {
       // return cache.addAll(precachedAssets);
     })
   );
-});
+}); */
 
 self.addEventListener("push", event => {
   console.log("Push received!");
