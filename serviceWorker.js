@@ -85,8 +85,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    if((event.request.url.indexOf('http') === 0)){ 
-      console.log('hey ffrom');
+    if(event.request.clone().method === 'GET'){ 
       event.respondWith(
     cacheFirst({
       request: event.request,
