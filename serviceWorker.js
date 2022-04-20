@@ -1,25 +1,12 @@
-const deleteCache = async key => {
-  await caches.delete(key)
-}
 
-const deleteOldCaches = async () => {
-   const cacheKeepList = ['v4'];
-   const keyList = await caches.keys()
-   const cachesToDelete = keyList.filter(key => !cacheKeepList.includes(key))
-   await Promise.all(cachesToDelete.map(deleteCache));
-}
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(deleteOldCaches());
-});
-
+//caches.delete("v4")
 const addResourcesToCache = async (resources) => {
-  const cache = await caches.open('v4');
+  const cache = await caches.open('v5');
   await cache.addAll(resources);
 };
 
 const putInCache = async (request, response) => {
-  const cache = await caches.open('v4');
+  const cache = await caches.open('v5');
 
   await cache.put(request, response);
 };
@@ -32,12 +19,12 @@ const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
   }
 
   // Next try to use the preloaded response, if it's there
-  const preloadResponse = await preloadResponsePromise;
+/*   const preloadResponse = await preloadResponsePromise;
   if (preloadResponse) {
     console.info('using preload response', preloadResponse);
     putInCache(request, preloadResponse.clone());
     return preloadResponse;
-  }
+  } */
 
   // Next try to get the resource from the network
   try {
@@ -69,9 +56,9 @@ const enableNavigationPreload = async () => {
   }
 };
 
-self.addEventListener('activate', (event) => {
+/* self.addEventListener('activate', (event) => {
   event.waitUntil(enableNavigationPreload());
-});
+}); */
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -79,7 +66,6 @@ self.addEventListener('install', (event) => {
       '/index.html',
       '/style.css',
       '/offline.html',
-      '/images/viking-logo-Transparent.png'
     ])
   );
 });
@@ -89,7 +75,7 @@ self.addEventListener('fetch', (event) => {
       event.respondWith(
     cacheFirst({
       request: event.request,
-      preloadResponsePromise: event.preloadResponse,
+      //preloadResponsePromise: event.preloadResponse,
       fallbackUrl: '/offline.html',
     })
   );
@@ -97,31 +83,6 @@ self.addEventListener('fetch', (event) => {
 
 });
 
-
-
-/* self.addEventListener('fetch', function(event) {
-  console.info("hey form service;")
-  event.respondWith(
-    caches.open('mysite-dynamic').then(function(cache) {
-      return fetch(event.request).then(function(response) {
-        cache.put(event.request, response.clone());
-        return response;
-      });
-    })
-  );
-});
-
-
- self.addEventListener("install", function(event) {
-
-  event.waitUntil(
-    caches.open("sw-cache").then(function(cache) {
-      //return cache.add("index.html");
-      //return cache.add("offline.html");
-      // return cache.addAll(precachedAssets);
-    })
-  );
-}); */
 
 self.addEventListener("push", event => {
   console.log("Push received!");

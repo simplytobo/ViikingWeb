@@ -1,4 +1,4 @@
-
+var hey;
 function setCookie(name, value, expireIn ){
   const d = new Date();
   console.log(name);
