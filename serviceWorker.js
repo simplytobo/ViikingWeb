@@ -1,12 +1,23 @@
+this.addEventListener('activate', function(event) {
+  var cachesToKeep = ['v7.1'];
 
-//caches.delete("v4")
+  event.waitUntil(
+    caches.keys().then(function(keyList) {
+      return Promise.all(keyList.map(function(key) {
+        if (cachesToKeep.indexOf(key) === -1) {
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+});
 const addResourcesToCache = async (resources) => {
-  const cache = await caches.open('v5');
+  const cache = await caches.open('v7.1');
   await cache.addAll(resources);
 };
 
 const putInCache = async (request, response) => {
-  const cache = await caches.open('v5');
+  const cache = await caches.open('v7.1');
 
   await cache.put(request, response);
 };

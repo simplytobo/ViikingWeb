@@ -95,10 +95,10 @@ function loop() {
   if (timetable) LessonsToMainScreen(timetable)
 }
 
-function päev() {
-  var today = new Date();
+function päev(dayNum) {
+/*   var today = new Date();
   let dayNum = today.getDay();
-  let day = "";
+  let day = ""; */
   if (dayNum == 0) day = "Esmaspäev";
   if (dayNum == 1) day = "Esmaspäev";
   if (dayNum == 2) day = "Teisipäev";
@@ -108,12 +108,12 @@ function päev() {
   if (dayNum == 6) day = "Esmaspäev";
   $("#today-text-id").text(day)
 }
-päev();
+
 
 let lesStart = ["08:00", "08:55", "09:50", "10:45", "11:45", "13:05", "14:00", "14:55", "15:50", "16:45", "17:30"]
 function LessonsToMainScreen(timetable) {
 
-  //"2022/03/10 09:00"
+  //"2022/04/22 09:00"
   var today = new Date();
   let dayNum = today.getDay();
   var currentTime = ("0" + today.getHours()).slice(-2) +
@@ -148,7 +148,8 @@ function LessonsToMainScreen(timetable) {
 function LessonsHeaderInfo(start, end, lesStart, dayNum, lessonNum, currentTime) {
   if (start <= currentTime && currentTime <= end) {
 
-
+    if(dayNum == 6 || dayNum == 0) dayNum = 1;
+    päev(dayNum);
     let data = getLessonData(dayNum, lessonNum);
     if (data.lesson == "-") {
       data = nextNonEmptyLessonIs(dayNum, lesStart)
