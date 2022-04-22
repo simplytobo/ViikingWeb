@@ -1,5 +1,5 @@
 this.addEventListener('activate', function(event) {
-  var cachesToKeep = ['v7.1'];
+  var cachesToKeep = ['v7.2'];
 
   event.waitUntil(
     caches.keys().then(function(keyList) {
@@ -12,12 +12,12 @@ this.addEventListener('activate', function(event) {
   );
 });
 const addResourcesToCache = async (resources) => {
-  const cache = await caches.open('v7.1');
+  const cache = await caches.open('v7.2');
   await cache.addAll(resources);
 };
 
 const putInCache = async (request, response) => {
-  const cache = await caches.open('v7.1');
+  const cache = await caches.open('v7.2');
 
   await cache.put(request, response);
 };
@@ -72,6 +72,7 @@ const enableNavigationPreload = async () => {
 }); */
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     addResourcesToCache([
       '/index.html',
