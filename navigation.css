@@ -63,7 +63,7 @@
 	z-index: 8;
 	visibility: hidden;
 	height: 100%;
-	background: var(--background-division2);
+	background: #1f1f1fe0;
 	-webkit-transition: all 0.4s;
 	transition: all 0.4s;
   padding-top: 3.5rem;

@@ -73,17 +73,17 @@ const enableNavigationPreload = async () => {
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
-  event.waitUntil(
+/*   event.waitUntil(
     addResourcesToCache([
       '/index.html',
       '/style.css',
       '/offline.html',
     ])
-  );
+  ); */
 });
 
 self.addEventListener('fetch', (event) => {
-    if(event.request.clone().method === 'GET'){ 
+    /* if(event.request.clone().method === 'GET'){ 
       event.respondWith(
     cacheFirst({
       request: event.request,
@@ -91,8 +91,28 @@ self.addEventListener('fetch', (event) => {
       fallbackUrl: '/offline.html',
     })
   );
+  } */
+  if(event.request.clone().method === 'GET'){
+    event.respondWith(
+      // Try the cache
+      
+      caches.match(event.request).then(function(response) {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then(function(response) {
+          if (response.status === 404) {
+            return caches.match('/offline.html');
+          }
+          putInCache(event.request, response.clone());
+          return response
+        });
+      }).catch(function() {
+        // If both fail, show a generic fallback:
+        return caches.match('/offline.html');
+      })
+    );
   }
-
 });
 
 
