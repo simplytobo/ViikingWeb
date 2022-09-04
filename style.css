@@ -14,10 +14,10 @@
 
   --pfp-button: #a46afb;
 
-  --purple: #44197c;
+  --purple: #343434;
 /*   --purple2: #6139b1; */
 
-  --purple2: #8237F5;
+  --purple2: #2626265e;
 
   --purple2dull: #a674f1;
 
@@ -34,26 +34,22 @@
 }
 
 .dark-mode {
-  --background-color: #1e1b31;
-  --background-color-dark: #171b22;
 
-  --box-shadow-color: #171b22;
-  --background-hue: #495057;
 /*   --background-division: #292f38;
 
   --background-division2: #292f38; */
-
-  --background-division: #292541;
-  --background-division2: #292541;
-
+  --background-color: #1c1c1c;
+  --background-color-dark: #404040;
+  --box-shadow-color: #171b22;
+  --background-hue: #495057;
+  --background-division: #2828288a;
+  --background-division2: #28282861;
   --font-color: #f2f5f8;
-
   --font-color-low-contrast: #dadbdb;
-
   --font-color-low-contrast-white: #dadbdb;
- --font-color-gray:#6c6c6f;
-  --purple: #44197c;
-  --purple2: #8237F5;
+  --font-color-gray: #6c6c6f;
+  --purple: #343434;
+  --purple2: #2626265e;
 }
 
 input {
@@ -270,6 +266,7 @@ body {
   border-bottom-right-radius: 3em;
   align-content: center;
   box-shadow: 1px 1px 7px var(--box-shadow-color); 
+  border-bottom: 7px solid #8237F5
   
 }
 
@@ -572,7 +569,7 @@ body {
   bottom: 4rem;
   right: 3rem;
   color:var(--font-color-low-contrast);
-  background-color: var(--purple2);
+  background-color: #8237F5;
   border-radius: 8px;
   height: 3em;
   padding: 0 .8rem 0 .8rem;
@@ -682,6 +679,7 @@ body {
   background-color: var(--background-division);
   z-index:2;
   height: 4em;
+  border-top: 7px solid #8237F5
 }
  
 #mainoption1-id {
