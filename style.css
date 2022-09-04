@@ -919,6 +919,7 @@ body {
   justify-content:center;
   align-items: flex-start;
   flex: .9;
+  overflow:auto;
 }
 
 .timetable-today {
