@@ -352,17 +352,26 @@ function createClassOptions(classNames){
 
 //Sign up flow
 optionsNextBtn.addEventListener("click", (e) => {
-  if(optionsWrapper.querySelectorAll(".selected")== null){
+  if(optionsWrapper.querySelectorAll(".selected") == null){
     alert("Vali klass enne jätkamist")
   }else{
+    //Shimmer effect 
+    document.getElementById("timetable-today-id").classList.add("card-loading")
+    document.getElementById("home-screen-id").classList.add("card-loading")
+    document.getElementById("loading-screen-id").classList.remove("hide")
+    
     let klass = optionsWrapper.querySelectorAll(".selected")[0].textContent
     //upsertClassName(klass).then(()=>{});
     setCookie("className", klass)
     let domain = "https://tyhg.edu.ee/tunniplaan/index_"+klass+".htm";
     $("#timetableiframe").attr("src",domain);   
-    changeClass.classList.remove("blinking");
+    
     changeClass.innerHTML = klass;
-    getTimetable(klass);
+    getTimetable(klass).then(()=>{
+      document.getElementById("loading-screen-id").classList.add("hide")
+      document.getElementById("timetable-today-id").classList.remove("card-loading")
+      document.getElementById("home-screen-id").classList.remove("card-loading") 
+    })
   }
   optionsScreen.classList.add("hide");
   mainScreen.classList.remove("hide");

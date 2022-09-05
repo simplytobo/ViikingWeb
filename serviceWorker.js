@@ -3,11 +3,13 @@ let coreAssets = [
   
 ];
 
+const version = "v1"
+
 // On install, cache some stuff
 self.addEventListener('install', function (event) {
 
   // Cache core assets
-  event.waitUntil(caches.open('app5').then(function (cache) {
+  event.waitUntil(caches.open(version).then(function (cache) {
     for (let asset of coreAssets) {
       cache.add(new Request(asset));
     }
@@ -15,6 +17,21 @@ self.addEventListener('install', function (event) {
   }));
 
 });
+
+self.addEventListener('activate', event => {
+// Remove old caches
+  event.waitUntil(
+    (async () => {
+      const keys = await caches.keys();
+      return keys.map(async (cache) => {
+        if(cache !== version) {
+          console.log('Service Worker: Removing old cache: '+cache);
+          return await caches.delete(cache);
+        }
+      })
+    })()
+  )
+})
 
 // Listen for request events
 self.addEventListener('fetch', (event) => {
@@ -36,7 +53,7 @@ self.addEventListener('fetch', (event) => {
     let accept = request.headers.get('Accept')
     // image
     // Offline-first
-    if (accept.includes('text/css') || accept.includes('image') ){
+    if (accept.includes('image') ){
       // Handle CSS and JavaScript files...
       // Check the cache first
       // If it's not found, send the request to the network
@@ -45,7 +62,7 @@ self.addEventListener('fetch', (event) => {
           return response || fetch(request).then(function (response) {
             
             let copy = response.clone();
-  					event.waitUntil(caches.open('app5').then(function (cache) {
+  					event.waitUntil(caches.open(version).then(function (cache) {
   						return cache.put(request, copy);
   					}));
             return response;
@@ -63,7 +80,7 @@ self.addEventListener('fetch', (event) => {
         fetch(request).then(function (response) {
           // Create a copy of the response and save it to the cache
   				let copy = response.clone();
-  				event.waitUntil(caches.open('app5').then(function (cache) {
+  				event.waitUntil(caches.open(version).then(function (cache) {
   					return cache.put(request, copy);
   				}));
           

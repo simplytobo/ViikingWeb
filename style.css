@@ -799,6 +799,7 @@ body {
   border-radius: 1.5em;
   margin-bottom: auto;
   margin-top: auto;
+  border-top: 7px solid #8237F5
 
 }
 .ekool-input-divider-header{
@@ -933,6 +934,7 @@ body {
   padding-top: 1.5em;
   padding-bottom: .5em;
   align-items: center;
+  border-top: 7px solid #8237F5;
 }
 
 .main-screen-div-right {
@@ -1363,7 +1365,28 @@ daydiv{
   top: -1rem;
   width: 100%;
 }
+.card-loading{
+  background: var(--background-division2) ;
+  background: linear-gradient(110deg, var(--background-division2) 8%, #363636 18%, var(--background-division2) 33%);
+  background-size: 200% 100%;
+  -webkit-animation: 2s shine linear infinite;
+          animation: 2s shine linear infinite;
+}
+@-webkit-keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+
 /* .hide should be last */
 .hide {
   display: none;
 }
+.
