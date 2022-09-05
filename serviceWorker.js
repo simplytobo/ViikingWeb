@@ -1,118 +1,97 @@
-this.addEventListener('activate', function(event) {
-  var cachesToKeep = ['v7.2'];
+let coreAssets = [
+  '/offline.html',
+  '/script.js',
+  '/style.css',
+  '/index.html',
+  '/dark.css',
+  '/dark-mode.css',
+  '/feedback.js',
+  '/helperScripts.js',
+  '/index.html',
+  '/dark.css',
+  
+];
 
-  event.waitUntil(
-    caches.keys().then(function(keyList) {
-      return Promise.all(keyList.map(function(key) {
-        if (cachesToKeep.indexOf(key) === -1) {
-          return caches.delete(key);
-        }
-      }));
-    })
-  );
-});
-const addResourcesToCache = async (resources) => {
-  const cache = await caches.open('v7.2');
-  await cache.addAll(resources);
-};
+// On install, cache some stuff
+self.addEventListener('install', function (event) {
 
-const putInCache = async (request, response) => {
-  const cache = await caches.open('v7.2');
-
-  await cache.put(request, response);
-};
-
-const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
-  // First try to get the resource from the cache
-  const responseFromCache = await caches.match(request);
-  if (responseFromCache) {
-    return responseFromCache;
-  }
-
-  // Next try to use the preloaded response, if it's there
-/*   const preloadResponse = await preloadResponsePromise;
-  if (preloadResponse) {
-    console.info('using preload response', preloadResponse);
-    putInCache(request, preloadResponse.clone());
-    return preloadResponse;
-  } */
-
-  // Next try to get the resource from the network
-  try {
-    const responseFromNetwork = await fetch(request);
-    // response may be used only once
-    // we need to save clone to put one copy in cache
-    // and serve second one
-    putInCache(request, responseFromNetwork.clone());
-    return responseFromNetwork;
-  } catch (error) {
-    const fallbackResponse = await caches.match(fallbackUrl);
-    if (fallbackResponse) {
-      return fallbackResponse;
+  // Cache core assets
+  event.waitUntil(caches.open('app4').then(function (cache) {
+    for (let asset of coreAssets) {
+      cache.add(new Request(asset));
     }
-    // when even the fallback response is not available,
-    // there is nothing we can do, but we must always
-    // return a Response object
-    return new Response('Network error happened', {
-      status: 408,
-      headers: { 'Content-Type': 'text/plain' },
-    });
-  }
-};
+    return cache;
+  }));
 
-const enableNavigationPreload = async () => {
-  if (self.registration.navigationPreload) {
-    // Enable navigation preloads!
-    await self.registration.navigationPreload.enable();
-  }
-};
-
-/* self.addEventListener('activate', (event) => {
-  event.waitUntil(enableNavigationPreload());
-}); */
-
-self.addEventListener('install', (event) => {
-  self.skipWaiting();
-/*   event.waitUntil(
-    addResourcesToCache([
-      '/index.html',
-      '/style.css',
-      '/offline.html',
-    ])
-  ); */
 });
 
+// Listen for request events
 self.addEventListener('fetch', (event) => {
-    /* if(event.request.clone().method === 'GET'){ 
+
+  try{
+    // Get the request
+    let request = event.request;
+  
+    // Bug fix
+    // https://stackoverflow.com/a/49719964
+    if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') return;
+
+    //Google analytics
+    if (request.url.includes("google-analytics")) return
+    // Handle post requests
+    if (request.method.toUpperCase() === 'POST') return event.respondWith(handlePostRequest(event));
+  
+  
+    
+    // image
+    // Offline-first
+    if (request.headers.get('Accept').includes('text/css') || request.headers.get('Accept').includes('image')){
+      // Handle CSS and JavaScript files...
+      // Check the cache first
+      // If it's not found, send the request to the network
       event.respondWith(
-    cacheFirst({
-      request: event.request,
-      //preloadResponsePromise: event.preloadResponse,
-      fallbackUrl: '/offline.html',
-    })
-  );
-  } */
-  if(event.request.clone().method === 'GET'){
-    event.respondWith(
-      // Try the cache
+        caches.match(request).then(function (response) {
+          return response || fetch(request).then(function (response) {
+            
+            let copy = response.clone();
+  					event.waitUntil(caches.open('app1').then(function (cache) {
+  						return cache.put(request, copy);
+  					}));
+            return response;
+          });
+        })
+      );
+    }
+    // Network-first
+    else {
+      // Handle HTML and json files...
       
-      caches.match(event.request).then(function(response) {
-        if (response) {
+      // Send the request to the network first
+      // If it's not found, look in the cache
+      event.respondWith(
+        fetch(request).then(function (response) {
+          // Create a copy of the response and save it to the cache
+  				let copy = response.clone();
+  				event.waitUntil(caches.open('app4').then(function (cache) {
+  					return cache.put(request, copy);
+  				}));
+          
           return response;
-        }
-        return fetch(event.request).then(function(response) {
-          if (response.status === 404) {
-            return caches.match('/offline.html');
-          }
-          putInCache(event.request, response.clone());
-          return response
-        });
-      }).catch(function() {
-        // If both fail, show a generic fallback:
-        return caches.match('/offline.html');
-      })
-    );
+          
+        }).catch(function (error) {
+          
+          return caches.match(request).then(function (response) {
+            
+            return response;
+          });
+        })
+      );
+      return
+    }
+  } catch (e) {
+    return event.respondWith(new Response('Error thrown ' + e.message));
   }
+  
 });
 
 
@@ -150,6 +129,50 @@ self.addEventListener("notificationclick", function(event) {
   }
 });
 
+async function sha256(message) {
+  // encode as UTF-8
+  const msgBuffer = new TextEncoder().encode(message);
 
+  // hash the message
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+  // convert bytes to hex string
+  return [...new Uint8Array(hashBuffer)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+
+async function handlePostRequest(event) {
+  const request = event.request;
+  const body = await request.clone().text();
+
+  // Hash the request body to use it as a part of the cache key
+  const hash = await sha256(body);
+  const cacheUrl = new URL(request.url);
+
+  // Store the URL in cache by prepending the body's hash
+  cacheUrl.pathname = '/posts' + cacheUrl.pathname + hash;
+
+  // Convert to a GET to be able to cache
+  const cacheKey = new Request(cacheUrl.toString(), {
+    headers: request.headers,
+    method: 'GET',
+  });
+
+  const cache = caches.default;
+
+  let response
+  if (cache) {
+    response = await cache.match(cacheKey);
+  }
+  // Find the cache key in the cache
+  
+
+  // Otherwise, fetch response to POST request from origin
+  if (!response && cache) {
+    response = await fetch(request);
+    event.waitUntil(cache.put(cacheKey, response.clone()));
+  }
+  return response;
+}
     
 

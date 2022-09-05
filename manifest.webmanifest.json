@@ -1,7 +1,7 @@
 {
     "theme_color": "#8237F5",
     "start_url": ".",
-    "background_color": "#6139b1",
+    "background_color": "#1c1c1c",
     "display": "standalone",
     "app_name": "Viiking",
     "short_name": "Viiking",

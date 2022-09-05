@@ -61,6 +61,13 @@ if ("serviceWorker" in navigator) {
       .then(function(reg) {
         console.log("service worker registered");
         registration = reg;
+        if (registration.installing) {
+          console.log("Service worker installing");
+        } else if (registration.waiting) {
+          console.log("Service worker installed");
+        } else if (registration.active) {
+          console.log("Service worker active");
+        }
       })
       .catch(err => console.error(`Registration failed with ${err}`))
   })
