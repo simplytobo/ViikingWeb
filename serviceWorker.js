@@ -1,14 +1,5 @@
 let coreAssets = [
   '/offline.html',
-  '/script.js',
-  '/style.css',
-  '/index.html',
-  '/dark.css',
-  '/dark-mode.css',
-  '/feedback.js',
-  '/helperScripts.js',
-  '/index.html',
-  '/dark.css',
   
 ];
 
@@ -16,7 +7,7 @@ let coreAssets = [
 self.addEventListener('install', function (event) {
 
   // Cache core assets
-  event.waitUntil(caches.open('app4').then(function (cache) {
+  event.waitUntil(caches.open('app5').then(function (cache) {
     for (let asset of coreAssets) {
       cache.add(new Request(asset));
     }
@@ -42,10 +33,10 @@ self.addEventListener('fetch', (event) => {
     if (request.method.toUpperCase() === 'POST') return event.respondWith(handlePostRequest(event));
   
   
-    
+    let accept = request.headers.get('Accept')
     // image
     // Offline-first
-    if (request.headers.get('Accept').includes('text/css') || request.headers.get('Accept').includes('image')){
+    if (accept.includes('text/css') || accept.includes('image') ){
       // Handle CSS and JavaScript files...
       // Check the cache first
       // If it's not found, send the request to the network
@@ -54,7 +45,7 @@ self.addEventListener('fetch', (event) => {
           return response || fetch(request).then(function (response) {
             
             let copy = response.clone();
-  					event.waitUntil(caches.open('app1').then(function (cache) {
+  					event.waitUntil(caches.open('app5').then(function (cache) {
   						return cache.put(request, copy);
   					}));
             return response;
@@ -72,7 +63,7 @@ self.addEventListener('fetch', (event) => {
         fetch(request).then(function (response) {
           // Create a copy of the response and save it to the cache
   				let copy = response.clone();
-  				event.waitUntil(caches.open('app4').then(function (cache) {
+  				event.waitUntil(caches.open('app5').then(function (cache) {
   					return cache.put(request, copy);
   				}));
           

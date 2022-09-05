@@ -664,7 +664,7 @@ body {
 
   display: flex;
     align-items: center;
-    height: min(10vw, 1.8rem);
+    height: min(10vw, 1.6rem);
     margin-bottom: 2rem;
     margin-top: 1rem;
     justify-content: space-around;

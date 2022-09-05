@@ -13,7 +13,7 @@
     list-style: none;
     width: 20px;
     height: 20px;
-    background: var(--purple2);
+    background: #262626;
     animation: animate 50s linear infinite;
     bottom: -150px;
     opacity: 0.7;
