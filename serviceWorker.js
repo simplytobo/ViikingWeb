@@ -3,7 +3,7 @@ let coreAssets = [
   
 ];
 
-const version = "v1"
+const version = "v4"
 
 // On install, cache some stuff
 self.addEventListener('install', function (event) {
@@ -51,9 +51,32 @@ self.addEventListener('fetch', (event) => {
   
   
     let accept = request.headers.get('Accept')
+    const conditionsArray = [
+      accept.includes('text/javascript'),
+      accept.includes('text/html'),
+      accept.includes('text/css'),
+    ]
+    if(conditionsArray.includes(true)){
+      event.respondWith(async function () {
+    const cache = await caches.open(version)
+
+    const cachedResponsePromise = await cache.match(request)
+    const networkResponsePromise = fetch(request)
+
+    if (request.url.startsWith(self.location.origin)) {
+      event.waitUntil(async function () {
+        const networkResponse = await networkResponsePromise
+
+        await cache.put(request, networkResponse.clone())
+      }())
+    }
+
+    return cachedResponsePromise || networkResponsePromise
+  }())
+    }
     // image
     // Offline-first
-    if (accept.includes('image') ){
+    else if (accept.includes('image')){
       // Handle CSS and JavaScript files...
       // Check the cache first
       // If it's not found, send the request to the network
