@@ -4,7 +4,6 @@ var SUPABASE_KEY =
 
 const { createClient } = supabase;
 supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
-//var supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
 
 const inputEmail =  document.getElementById("login-input-email");
 const inputPassword =  document.getElementById("login-input-pass");

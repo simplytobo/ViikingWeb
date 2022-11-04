@@ -858,9 +858,9 @@ body {
   
 }
 .home-icon-ekool{
-    height: 55%;
-    filter: invert(0.85);
-    margin-left: .8em;
+  height: 55%;
+  filter: invert(0.85);
+  margin-left: .8em;
 }
 .feedHeaderRefreshBtn{
   height: 45%;
@@ -903,14 +903,14 @@ body {
 }
 .feedItemDescription{
     
-    white-space: wrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-height: 1.5rem;
-    max-height: 3rem;    /* fallback */
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.5rem;
+  max-height: 3rem;    /* fallback */
 }
 
 
@@ -1046,13 +1046,13 @@ font-weight: 700;
   font-size: .7rem;
 }
 .taskHeader{
-overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-height: 1.5rem;
-    max-height: 3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.5rem;
+  max-height: 3rem;
 
 }
 .taskWrapper{
@@ -1074,13 +1074,13 @@ overflow: hidden;
   
 }
 .taskContent{
-      overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-height: 1.5rem;
-    max-height: 3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.5rem;
+  max-height: 3rem;
 }
 .taskContent p{
     display: block !improtant;
@@ -1255,10 +1255,11 @@ daydiv{
   color:var(--purple2);
   top:49%;
   min-width: 90%;
-  max-width:130%;
+  max-width: 130%;
   text-align:center;
   border-radius:.3rem;
 }
+
 @keyframes shine{
   0% {
     background-position-x: -500%;
@@ -1267,6 +1268,7 @@ daydiv{
     background-position-x: 500%;
   }
 }
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);
@@ -1296,13 +1298,10 @@ daydiv{
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   align-self: left;
-
   align-self: center;
   align-items: center;
-
   background: var(--background-division);
   border-radius: 50px;
-
 }
 
 .header-timetable-div {
@@ -1312,7 +1311,6 @@ daydiv{
   width: 100%;
   top: 0;
   z-index: 4;
-
   border-bottom-left-radius: 0em;
   border-bottom-right-radius: 0em;
 }
@@ -1382,6 +1380,37 @@ daydiv{
   to {
     background-position-x: -200%;
   }
+}
+
+#submitBtnFB {
+  
+  background-color: #6139b1;
+  z-index: 3;
+  color: #dadbdb;
+  width: 5em;
+
+
+  font-family: var(--main-font);
+  font-weight: bold;
+  font-size: 0.8em;
+  padding: 0.7em;
+  border-radius: 5px;
+  border: none;
+}
+
+.wrappertagasi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input_field {
+  width: 95%;
+}
+
+.tagasiside-h2 {
+  margin-bottom: 2em;
+  color: var(--background-color);
 }
 
 

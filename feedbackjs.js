@@ -25,6 +25,8 @@ function validate()
   else{
     text = "Tagasiside saadetud";
     success_message.style.padding = "10px";
+    error_message.style.padding = "0px"
     success_message.innerHTML = text;
+    error_message.innerHTML = "";
   }
 }
